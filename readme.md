@@ -1,6 +1,10 @@
 # pdf-markup
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/3c40f87d-46c4-4431-b233-4a7a77a067d1/deploy-status)](https://app.netlify.com/sites/pdf-markup/deploys)
+
 _An app for basic pdf markups._
+
+View the live site [here](https://pdf-markup.netlify.com).
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
