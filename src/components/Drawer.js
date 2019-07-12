@@ -58,11 +58,11 @@ export default function Drawer({setZoom, zoom}) {
 
   function handleZoom(type) {
     if (type === 'out' && zoom > .5) {
-      setZoom(zoom - .5);
+      setZoom(zoom - .25);
     }
 
     if (type === 'in' && zoom < 3) {
-      setZoom(zoom + .5);
+      setZoom(zoom + .25);
     }
   }
 
@@ -107,7 +107,7 @@ export default function Drawer({setZoom, zoom}) {
         </ListItem>
         <ListItem dense>
           <ListItemText className={classes.zoomText}>
-            {`x${zoom}`}
+            {`x${zoom.toFixed(2)}`}
           </ListItemText>
         </ListItem>
         <ListItem button onClick={() => handleZoom('out')}>

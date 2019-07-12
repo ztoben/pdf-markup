@@ -14,16 +14,6 @@ const styles = theme => ({
   root: {
     width: '100%',
   },
-  controls: {
-    margin: theme.spacing(3),
-  },
-  exampleWrapper: {
-    position: 'relative',
-    height: 380,
-  },
-  radioGroup: {
-    margin: theme.spacing(1, 0),
-  },
   speedDial: {
     position: 'absolute',
     '&$directionUp': {
@@ -76,7 +66,7 @@ class Actions extends Component {
 
     const speedDialClassName = clsx(
       classes.speedDial,
-      classes[`directionUp`],
+      classes['directionUp'],
     );
 
     return (
