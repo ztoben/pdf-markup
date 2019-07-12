@@ -7,7 +7,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import AddCircleIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircleOutline';
+import CreateIcon from '@material-ui/icons/Create';
+import UndoIcon from '@material-ui/icons/Undo';
+import TextFieldsIcon from '@material-ui/icons/TextFields';
+import CropFreeIcon from '@material-ui/icons/CropFree';
 import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -41,6 +46,11 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  zoomText: {
+    display: 'flex',
+    justifyContent: 'center',
+    margin: 0
+  }
 }));
 
 export default function AppDrawer({setZoom, zoom}) {
@@ -68,14 +78,35 @@ export default function AppDrawer({setZoom, zoom}) {
         }),
       }}
     >
-      <List>
+      <List disablePadding>
+        <ListItem button>
+          <ListItemIcon>
+            <TextFieldsIcon />
+          </ListItemIcon>
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <CropFreeIcon />
+          </ListItemIcon>
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <CreateIcon />
+          </ListItemIcon>
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <UndoIcon />
+          </ListItemIcon>
+        </ListItem>
+        <Divider />
         <ListItem button onClick={() => handleZoom('in')}>
           <ListItemIcon>
             <AddCircleIcon />
           </ListItemIcon>
         </ListItem>
-        <ListItem>
-          <ListItemText>
+        <ListItem dense>
+          <ListItemText className={classes.zoomText}>
             {`x${zoom}`}
           </ListItemText>
         </ListItem>
