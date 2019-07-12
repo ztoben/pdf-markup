@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
+import MaterialDrawer from '@material-ui/core/Drawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function AppDrawer({setZoom, zoom}) {
+export default function Drawer({setZoom, zoom}) {
   const classes = useStyles();
 
   function handleZoom(type) {
@@ -67,7 +67,7 @@ export default function AppDrawer({setZoom, zoom}) {
   }
 
   return (
-    <Drawer
+    <MaterialDrawer
       variant="permanent"
       className={clsx(classes.drawer, {
         [classes.drawerClose]: true,
@@ -116,6 +116,6 @@ export default function AppDrawer({setZoom, zoom}) {
           </ListItemIcon>
         </ListItem>
       </List>
-    </Drawer>
+    </MaterialDrawer>
   );
 }

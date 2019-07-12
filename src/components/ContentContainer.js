@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import AppContentPresentational from './AppContentPresentational';
+import ContentPresentational from './ContentPresentational';
 import renderPdf from '../utils/renderPdf';
 
-export default class AppContentContainer extends Component {
+export default class ContentContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -20,15 +20,15 @@ export default class AppContentContainer extends Component {
     const {acceptedFiles: prevFiles, zoom: prevZoom} = prevState;
     const {acceptedFiles: currFiles, zoom: currZoom} = this.state;
 
-    if ((prevFiles !== currFiles || prevZoom !== currZoom) && currFiles) {
+    if (currFiles && (prevFiles !== currFiles || prevZoom !== currZoom)) {
       renderPdf({pdfsRef: this.pdfsRef, zoom: currZoom, setPages: this.setPages, acceptedFiles: currFiles})
     }
   }
 
-  setAcceptedFiles = (acceptedFiles) => this.setState({acceptedFiles});
-  setZoom = (zoom) => this.setState({zoom});
-  setPages = (pages) => this.setState({pages});
-  setCurrentPage = (currentPage) => this.setState({currentPage});
+  setAcceptedFiles = acceptedFiles => this.setState({acceptedFiles});
+  setZoom = zoom => this.setState({zoom});
+  setPages = pages => this.setState({pages});
+  setCurrentPage = currentPage => this.setState({currentPage});
 
   render() {
     const {
@@ -39,7 +39,7 @@ export default class AppContentContainer extends Component {
     } = this.state;
 
     return (
-      <AppContentPresentational
+      <ContentPresentational
         currentPage={currentPage}
         zoom={zoom}
         acceptedFiles={acceptedFiles}

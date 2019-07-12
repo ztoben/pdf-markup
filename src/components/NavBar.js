@@ -13,7 +13,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function ButtonAppBar() {
+export default function NavBar() {
   const classes = useStyles();
 
   return (

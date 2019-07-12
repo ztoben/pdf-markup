@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import AppNavBar from './components/AppNavBar';
-import AppContentContainer from './components/AppContentContainer';
+import NavBar from './components/NavBar';
+import ContentContainer from './components/ContentContainer';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -15,8 +15,8 @@ export default function PersistentDrawerLeft() {
 
   return (
     <div className={classes.root}>
-      <AppNavBar />
-      <AppContentContainer />
+      <NavBar />
+      <ContentContainer />
     </div>
   );
 }

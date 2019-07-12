@@ -34,7 +34,7 @@ const styles = theme => ({
   directionUp: {}
 });
 
-class AppActions extends Component {
+class Actions extends Component {
   state = {
     open: false,
     hidden: false,
@@ -112,4 +112,4 @@ class AppActions extends Component {
   }
 }
 
-export default withStyles(styles)(AppActions);
+export default withStyles(styles)(Actions);

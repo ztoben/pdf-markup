@@ -1,11 +1,11 @@
 import React from 'react';
 import {Card, makeStyles} from '@material-ui/core';
-import AppDrawer from './AppDrawer';
+import Drawer from './Drawer';
 import PdfDropzone from './PdfDropzone';
 import PageControls from './PageControls';
-import AppActions from './AppActions';
+import Actions from './Actions';
 
-export default function AppContentPresentational({
+export default function ContentPresentational({
   currentPage,
   zoom,
   acceptedFiles,
@@ -54,7 +54,7 @@ export default function AppContentPresentational({
 
   return (
     <main className={classes.content}>
-      <AppDrawer
+      <Drawer
         setZoom={setZoom}
         zoom={zoom}
       />
@@ -67,7 +67,7 @@ export default function AppContentPresentational({
         <div className={classes.canvasContainer} ref={pdfsRef}/>
       </div>
       {pages && <PageControls currentPage={currentPage} pages={pages} setCurrentPage={setCurrentPage}/>}
-      <AppActions
+      <Actions
         setAcceptedFiles={setAcceptedFiles}
         pdfsRef={pdfsRef}
         setPages={setPages}
