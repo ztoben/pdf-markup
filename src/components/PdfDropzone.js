@@ -33,10 +33,11 @@ const rejectStyle = {
   borderColor: '#ff1744'
 };
 
-export default function PdfDropzone({pdfs, setPdfs, pdfsRef, zoom}) {
+export default function PdfDropzone({pdfs, setPdfs, pdfsRef, zoom, setPages}) {
   const onDrop = useCallback(acceptedFiles => {
     let scale = zoom;
     let viewport;
+    let totalPages = 0;
 
     acceptedFiles.forEach(file => {
       const fileReader = new FileReader();
@@ -44,6 +45,7 @@ export default function PdfDropzone({pdfs, setPdfs, pdfsRef, zoom}) {
       fileReader.onload = function() {
         pdfjs.getDocument(fileReader.result).promise.then(function getPdf(pdf) {
           const canvasPages = Array(pdf.numPages);
+          totalPages += pdf.numPages;
 
           function renderPage(pageNumber, canvas, numPages) {
             pdf.getPage(pageNumber).then(function (page) {
@@ -58,6 +60,7 @@ export default function PdfDropzone({pdfs, setPdfs, pdfsRef, zoom}) {
 
                 if (canvasPages.length === numPages) {
                   canvasPages.forEach(canvasPage => pdfsRef.current.appendChild(canvasPage));
+                  setPages(totalPages);
                 }
               });
             });
@@ -65,7 +68,7 @@ export default function PdfDropzone({pdfs, setPdfs, pdfsRef, zoom}) {
 
           for(let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
             const canvas = document.createElement('canvas');
-            canvas.className = 'pdf-canvas';
+            canvas.className = `pdf-canvas canvas-${pageNumber}`;
 
             renderPage(pageNumber, canvas, pdf.numPages);
           }
@@ -78,7 +81,12 @@ export default function PdfDropzone({pdfs, setPdfs, pdfsRef, zoom}) {
     });
 
     setPdfs(acceptedFiles);
-  }, [setPdfs, pdfsRef, zoom]);
+  }, [
+    setPdfs,
+    pdfsRef,
+    zoom,
+    setPages
+  ]);
 
   const {
     getRootProps,
