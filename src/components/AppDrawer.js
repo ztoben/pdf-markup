@@ -7,7 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import AddCircleIcon from '@material-ui/icons/AddCircleOutline';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircleOutline';
-import CreateIcon from '@material-ui/icons/Create';
+import EditIcon from '@material-ui/icons/Edit';
 import UndoIcon from '@material-ui/icons/Undo';
 import TextFieldsIcon from '@material-ui/icons/TextFields';
 import CropFreeIcon from '@material-ui/icons/CropFree';
@@ -91,7 +91,7 @@ export default function AppDrawer({setZoom, zoom}) {
         </ListItem>
         <ListItem button>
           <ListItemIcon>
-            <CreateIcon />
+            <EditIcon />
           </ListItemIcon>
         </ListItem>
         <ListItem button>
