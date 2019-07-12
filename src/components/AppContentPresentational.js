@@ -1,17 +1,21 @@
-import React, { useState, useRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import {Card} from '@material-ui/core';
+import React from 'react';
+import {Card, makeStyles} from '@material-ui/core';
 import AppDrawer from './AppDrawer';
-import AppActions from './AppActions';
 import PdfDropzone from './PdfDropzone';
 import PageControls from './PageControls';
+import AppActions from './AppActions';
 
-export default function AppContent() {
-  const [pdfs, setPdfs] = useState(false);
-  const [zoom, setZoom] = useState(1.5);
-  const [pages, setPages] = useState();
-  const [currentPage, setCurrentPage] = useState(1);
-
+export default function AppContentPresentational({
+  currentPage,
+  zoom,
+  acceptedFiles,
+  pages,
+  setAcceptedFiles,
+  setCurrentPage,
+  setPages,
+  setZoom,
+  pdfsRef
+}) {
   const useStyles = makeStyles(theme => ({
     root: {
       display: 'flex',
@@ -30,9 +34,6 @@ export default function AppContent() {
       justifyContent: 'center',
       minHeight: '200px'
     },
-    hidden: {
-      display: 'none'
-    },
     canvasContainer: {
       display: 'flex',
       flexDirection: 'column'
@@ -50,7 +51,6 @@ export default function AppContent() {
   }));
 
   const classes = useStyles();
-  const pdfsRef = useRef(null);
 
   return (
     <main className={classes.content}>
@@ -58,23 +58,17 @@ export default function AppContent() {
         setZoom={setZoom}
         zoom={zoom}
       />
-      {!pdfs && (
+      {!acceptedFiles && (
         <Card className={classes.cardContent}>
-          <PdfDropzone
-            setPdfs={setPdfs}
-            pdfs={pdfs}
-            pdfsRef={pdfsRef}
-            zoom={zoom}
-            setPages={setPages}
-          />
+          <PdfDropzone setAcceptedFiles={setAcceptedFiles} acceptedFiles={acceptedFiles}/>
         </Card>
       )}
       <div className={classes.contentContainer}>
-        <div className={classes.canvasContainer} ref={pdfsRef} />
+        <div className={classes.canvasContainer} ref={pdfsRef}/>
       </div>
-      {pages && <PageControls currentPage={currentPage} pages={pages} setCurrentPage={setCurrentPage} />}
+      {pages && <PageControls currentPage={currentPage} pages={pages} setCurrentPage={setCurrentPage}/>}
       <AppActions
-        setPdfs={setPdfs}
+        setAcceptedFiles={setAcceptedFiles}
         pdfsRef={pdfsRef}
         setPages={setPages}
         setCurrentPage={setCurrentPage}

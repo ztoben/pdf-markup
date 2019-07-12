@@ -55,15 +55,18 @@ class AppActions extends Component {
   };
 
   buildActions = () => {
-    const { setPdfs, pdfsRef, setPages, setCurrentPage } = this.props;
+    const { setAcceptedFiles, pdfsRef, setPages, setCurrentPage } = this.props;
 
     return [
       { icon: <SaveIcon />, name: 'Save' },
       { icon: <PrintIcon />, name: 'Print' },
       { icon: <ShareIcon />, name: 'Share' },
-      { icon: <DeleteIcon />, name: 'Delete', onClick:  () => (
-        clearRef(pdfsRef) || setPdfs(false) || setPages(undefined) || setCurrentPage(1)
-      )},
+      { icon: <DeleteIcon />, name: 'Delete', onClick:  () => {
+        clearRef(pdfsRef);
+        setAcceptedFiles(false);
+        setPages(undefined);
+        setCurrentPage(1);
+      }},
     ];
   };
 
