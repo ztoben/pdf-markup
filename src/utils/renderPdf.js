@@ -1,8 +1,8 @@
 import pdfjs from '@bundled-es-modules/pdfjs-dist';
 import {clearRef} from './clearRef';
 
-export default function renderPdf({pdfsRef, zoom, setPages, acceptedFiles}) {
-  let scale = zoom;
+export default function renderPdf({pdfsRef, setPages, acceptedFiles}) {
+  let scale = 2;
   let viewport;
   let totalPages = 0;
 

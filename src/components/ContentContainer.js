@@ -8,7 +8,7 @@ export default class ContentContainer extends Component {
 
     this.state = {
       acceptedFiles: false,
-      zoom: 1.5,
+      zoom: 1,
       pages: undefined,
       currentPage: 1
     };
@@ -17,11 +17,11 @@ export default class ContentContainer extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {acceptedFiles: prevFiles, zoom: prevZoom} = prevState;
-    const {acceptedFiles: currFiles, zoom: currZoom} = this.state;
+    const {acceptedFiles: prevFiles} = prevState;
+    const {acceptedFiles: currFiles} = this.state;
 
-    if (currFiles && (prevFiles !== currFiles || prevZoom !== currZoom)) {
-      renderPdf({pdfsRef: this.pdfsRef, zoom: currZoom, setPages: this.setPages, acceptedFiles: currFiles})
+    if (currFiles && (prevFiles !== currFiles)) {
+      renderPdf({pdfsRef: this.pdfsRef, setPages: this.setPages, acceptedFiles: currFiles})
     }
   }
 

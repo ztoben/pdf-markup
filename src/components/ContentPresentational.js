@@ -36,7 +36,10 @@ export default function ContentPresentational({
     },
     canvasContainer: {
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      transform: `scale(${zoom})`,
+      transition: '1s ease-in-out',
+      transformOrigin: 'top'
     },
     contentContainer: {
       display: 'flex',
