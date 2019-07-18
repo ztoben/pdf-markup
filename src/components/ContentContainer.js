@@ -10,24 +10,31 @@ export default class ContentContainer extends Component {
       acceptedFiles: false,
       zoom: 1,
       pages: undefined,
-      currentPage: 1
+      currentPage: 1,
+      canvases: []
     };
 
     this.pdfsRef = React.createRef();
   }
 
   componentDidUpdate(prevProps, prevState) {
-    const {acceptedFiles: prevFiles} = prevState;
-    const {acceptedFiles: currFiles} = this.state;
+    const {acceptedFiles: prevAcceptedFiles} = prevState;
+    const {acceptedFiles: currAcceptedFiles} = this.state;
 
-    if (currFiles && (prevFiles !== currFiles)) {
-      renderPdf({pdfsRef: this.pdfsRef, setPages: this.setPages, acceptedFiles: currFiles})
+    if (currAcceptedFiles && (prevAcceptedFiles !== currAcceptedFiles)) {
+      renderPdf({
+        pdfsRef: this.pdfsRef,
+        setPages: this.setPages,
+        acceptedFiles: currAcceptedFiles,
+        setCanvases: this.setCanvases
+      });
     }
   }
 
   setAcceptedFiles = acceptedFiles => this.setState({acceptedFiles});
   setZoom = zoom => this.setState({zoom});
   setPages = pages => this.setState({pages});
+  setCanvases = canvases => this.setState({canvases});
   setCurrentPage = currentPage => this.setState({currentPage});
 
   render() {
@@ -35,7 +42,8 @@ export default class ContentContainer extends Component {
       currentPage,
       zoom,
       acceptedFiles,
-      pages
+      pages,
+      canvases
     } = this.state;
 
     return (
@@ -44,7 +52,9 @@ export default class ContentContainer extends Component {
         zoom={zoom}
         acceptedFiles={acceptedFiles}
         pages={pages}
+        canvases={canvases}
         setAcceptedFiles={this.setAcceptedFiles}
+        setCanvases={this.setCanvases}
         setCurrentPage={this.setCurrentPage}
         setPages={this.setPages}
         setZoom={this.setZoom}

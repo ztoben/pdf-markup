@@ -1,10 +1,11 @@
 import pdfjs from '@bundled-es-modules/pdfjs-dist';
 import {clearRef} from './clearRef';
 
-export default function renderPdf({pdfsRef, setPages, acceptedFiles}) {
+export default function renderPdf({pdfsRef, setPages, acceptedFiles, setCanvases}) {
   let scale = 2;
   let viewport;
   let totalPages = 0;
+  let canvases = [];
 
   clearRef(pdfsRef);
 
@@ -21,6 +22,9 @@ export default function renderPdf({pdfsRef, setPages, acceptedFiles}) {
             viewport = page.getViewport({scale});
             canvas.height = viewport.height;
             canvas.width = viewport.width;
+
+            canvases.push(canvas);
+
             page.render({
               canvasContext: canvas.getContext('2d'),
               viewport: viewport
@@ -28,8 +32,12 @@ export default function renderPdf({pdfsRef, setPages, acceptedFiles}) {
               canvasPages[pageNumber - 1] = canvas;
 
               if (canvasPages.length === numPages) {
-                canvasPages.forEach(canvasPage => pdfsRef.current.appendChild(canvasPage));
+                canvasPages.forEach(canvasPage => {
+                  pdfsRef.current.appendChild(canvasPage)
+                });
+
                 setPages(totalPages);
+                setCanvases(canvases);
               }
             });
           });

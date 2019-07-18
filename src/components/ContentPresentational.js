@@ -10,16 +10,15 @@ export default function ContentPresentational({
   zoom,
   acceptedFiles,
   pages,
+  canvases,
   setAcceptedFiles,
+  setCanvases,
   setCurrentPage,
   setPages,
   setZoom,
   pdfsRef
 }) {
   const useStyles = makeStyles(theme => ({
-    root: {
-      display: 'flex',
-    },
     content: {
       flexGrow: 1,
       padding: theme.spacing(3),
@@ -50,7 +49,8 @@ export default function ContentPresentational({
       },
       [`& .canvas-${currentPage}`]: {
         display: 'flex'
-      }
+      },
+      maxHeight: 'calc(100vh - 128px)'
     }
   }));
 
@@ -64,7 +64,7 @@ export default function ContentPresentational({
       />
       {!acceptedFiles && (
         <Card className={classes.cardContent}>
-          <PdfDropzone setAcceptedFiles={setAcceptedFiles} acceptedFiles={acceptedFiles}/>
+          <PdfDropzone setAcceptedFiles={setAcceptedFiles}/>
         </Card>
       )}
       <div className={classes.contentContainer}>
@@ -76,6 +76,8 @@ export default function ContentPresentational({
         pdfsRef={pdfsRef}
         setPages={setPages}
         setCurrentPage={setCurrentPage}
+        canvases={canvases}
+        setCanvases={setCanvases}
       />
     </main>
   );
