@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import clsx from 'clsx';
 import jsPDF from 'jspdf';
-import { withStyles } from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/core/styles';
 import SpeedDial from '@material-ui/lab/SpeedDial';
 import SpeedDialIcon from '@material-ui/lab/SpeedDialIcon';
 import SpeedDialAction from '@material-ui/lab/SpeedDialAction';
@@ -39,46 +39,68 @@ class Actions extends Component {
   };
 
   handleClose = () => {
-    this.setState({ open: false });
+    this.setState({open: false});
   };
 
   handleOpen = () => {
-    this.setState({ open: true });
+    this.setState({open: true});
   };
 
+  buildDocument() {
+    const {canvases} = this.props;
+    const doc = new jsPDF('p', 'mm');
+
+    canvases.forEach((canvas, idx) => {
+      const imgData = canvas.toDataURL('image/png');
+
+      if (idx > 0) doc.addPage();
+
+      doc.setPage(idx + 1);
+      doc.addImage(imgData, 'PNG', 0, 0, 210, 297); // A4 sizes
+    });
+
+    return doc;
+  }
+
   buildActions = () => {
-    const { setAcceptedFiles, pdfsRef, setPages, setCurrentPage, canvases, setCanvases } = this.props;
+    const {setAcceptedFiles, pdfsRef, setPages, setCurrentPage, canvases, setCanvases} = this.props;
 
     return [
-      { icon: <SaveIcon />, name: 'Save' },
-      { icon: <PrintIcon />, name: 'Print', onClick: () => {
-          const doc = new jsPDF('p', 'mm');
+      {
+        icon: <SaveIcon/>, name: 'Save', onClick: () => {
+          if (canvases.length > 0) {
+            const doc = this.buildDocument();
 
-          canvases.forEach((canvas, idx) => {
-            const imgData = canvas.toDataURL('image/png');
+            doc.save(`markup-${makeid(5)}.pdf`);
+          }
+        }
+      },
+      {
+        icon: <PrintIcon/>, name: 'Print', onClick: () => {
+          if (canvases.length > 0) {
+            const doc = this.buildDocument();
 
-            if (idx > 0) doc.addPage();
-
-            doc.setPage(idx + 1);
-            doc.addImage(imgData, 'PNG', 0, 0, 210, 297); // A4 sizes
-          });
-
-          if (canvases.length > 0) doc.save(`markup-${makeid(5)}.pdf`);
-      }},
-      { icon: <ShareIcon />, name: 'Share' },
-      { icon: <DeleteIcon />, name: 'Delete', onClick:  () => {
-        clearRef(pdfsRef);
-        setAcceptedFiles(false);
-        setPages(undefined);
-        setCurrentPage(1);
-        setCanvases([]);
-      }},
+            doc.autoPrint();
+            window.open(doc.output('bloburl'), '_blank');
+          }
+        }
+      },
+      {icon: <ShareIcon/>, name: 'Share'},
+      {
+        icon: <DeleteIcon/>, name: 'Delete', onClick: () => {
+          clearRef(pdfsRef);
+          setAcceptedFiles(false);
+          setPages(undefined);
+          setCurrentPage(1);
+          setCanvases([]);
+        }
+      },
     ];
   };
 
   render() {
-    const { classes } = this.props;
-    const { hidden, open } = this.state;
+    const {classes} = this.props;
+    const {hidden, open} = this.state;
 
     const speedDialClassName = clsx(
       classes.speedDial,
@@ -91,7 +113,7 @@ class Actions extends Component {
           ariaLabel="Actions"
           className={speedDialClassName}
           hidden={hidden}
-          icon={<SpeedDialIcon />}
+          icon={<SpeedDialIcon/>}
           onBlur={this.handleClose}
           onClick={this.handleClick}
           onClose={this.handleClose}
