@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ContentPresentational from './ContentPresentational';
 import renderPdf from '../utils/renderPdf';
+import {DEFAULT} from '../constants';
 
 export default class ContentContainer extends Component {
   constructor(props) {
@@ -11,7 +12,8 @@ export default class ContentContainer extends Component {
       zoom: 1,
       pages: undefined,
       currentPage: 1,
-      canvases: []
+      canvases: [],
+      selectedTool: DEFAULT
     };
 
     this.pdfsRef = React.createRef();
@@ -36,6 +38,7 @@ export default class ContentContainer extends Component {
   setPages = pages => this.setState({pages});
   setCanvases = canvases => this.setState({canvases});
   setCurrentPage = currentPage => this.setState({currentPage});
+  setSelectedTool = selectedTool => this.setState({selectedTool});
 
   render() {
     const {
@@ -43,7 +46,8 @@ export default class ContentContainer extends Component {
       zoom,
       acceptedFiles,
       pages,
-      canvases
+      canvases,
+      selectedTool
     } = this.state;
 
     return (
@@ -53,11 +57,13 @@ export default class ContentContainer extends Component {
         acceptedFiles={acceptedFiles}
         pages={pages}
         canvases={canvases}
+        selectedTool={selectedTool}
         setAcceptedFiles={this.setAcceptedFiles}
         setCanvases={this.setCanvases}
         setCurrentPage={this.setCurrentPage}
         setPages={this.setPages}
         setZoom={this.setZoom}
+        setSelectedTool={this.setSelectedTool}
         pdfsRef={this.pdfsRef}
       />
     );

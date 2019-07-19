@@ -11,11 +11,13 @@ export default function ContentPresentational({
   acceptedFiles,
   pages,
   canvases,
+  selectedTool,
   setAcceptedFiles,
   setCanvases,
   setCurrentPage,
   setPages,
   setZoom,
+  setSelectedTool,
   pdfsRef
 }) {
   const useStyles = makeStyles(theme => ({
@@ -61,6 +63,8 @@ export default function ContentPresentational({
       <Drawer
         setZoom={setZoom}
         zoom={zoom}
+        selectedTool={selectedTool}
+        setSelectedTool={setSelectedTool}
       />
       {!acceptedFiles && (
         <Card className={classes.cardContent}>
