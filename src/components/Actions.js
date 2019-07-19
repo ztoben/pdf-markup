@@ -11,6 +11,7 @@ import ShareIcon from '@material-ui/icons/Share';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {clearRef} from '../utils/clearRef';
 import {makeid} from '../utils/makeId';
+import {A4_LONG, A4_SHORT, LANDSCAPE, PORTRAIT} from '../constants';
 
 const styles = theme => ({
   root: {
@@ -48,15 +49,20 @@ class Actions extends Component {
 
   buildDocument() {
     const {canvases} = this.props;
-    const doc = new jsPDF('p', 'mm');
+    let doc = null;
 
     canvases.forEach((canvas, idx) => {
       const imgData = canvas.toDataURL('image/png');
+      const orientation = canvas.width >= canvas.height ? LANDSCAPE : PORTRAIT;
+      const imgWidth = orientation === LANDSCAPE ? A4_LONG : A4_SHORT;
+      const imgHeight = orientation === PORTRAIT ? A4_LONG : A4_SHORT;
 
-      if (idx > 0) doc.addPage();
+      if (!doc) doc = new jsPDF(orientation, 'mm', 'a4');
+
+      if (idx > 0) doc.addPage('a4', orientation);
 
       doc.setPage(idx + 1);
-      doc.addImage(imgData, 'PNG', 0, 0, 210, 297); // A4 sizes
+      doc.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
     });
 
     return doc;
