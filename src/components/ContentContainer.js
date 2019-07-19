@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import ContentPresentational from './ContentPresentational';
 import renderPdf from '../utils/renderPdf';
 import {DEFAULT} from '../constants';

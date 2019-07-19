@@ -12,7 +12,7 @@ export default function renderPdf({pdfsRef, setPages, acceptedFiles, setCanvases
   acceptedFiles.forEach(file => {
     const fileReader = new FileReader();
 
-    fileReader.onload = function() {
+    fileReader.onload = function () {
       pdfjs.getDocument(fileReader.result).promise.then(function getPdf(pdf) {
         const canvasPages = Array(pdf.numPages);
         totalPages += pdf.numPages;
@@ -43,13 +43,13 @@ export default function renderPdf({pdfsRef, setPages, acceptedFiles, setCanvases
           });
         }
 
-        for(let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
+        for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
           const canvas = document.createElement('canvas');
           canvas.className = `pdf-canvas canvas-${pageNumber}`;
 
           renderPage(pageNumber, canvas, pdf.numPages);
         }
-      }, function(error){
+      }, function (error) {
         console.log(error);
       });
     };

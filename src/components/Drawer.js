@@ -82,13 +82,8 @@ export default function Drawer({
   ];
 
   function handleZoom(type) {
-    if (type === 'out' && zoom > .5) {
-      setZoom(zoom - .25);
-    }
-
-    if (type === 'in' && zoom < 3) {
-      setZoom(zoom + .25);
-    }
+    if (type === 'out' && zoom > .5) setZoom(zoom - .25);
+    if (type === 'in' && zoom < 3) setZoom(zoom + .25);
   }
 
   return (
