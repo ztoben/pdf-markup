@@ -36,7 +36,7 @@ export default function ContentPresentational({
       minHeight: '200px'
     },
     canvasContainer: {
-      display: 'flex',
+      display: canvases ? 'flex' : 'none',
       flexDirection: 'column',
       transform: `scale(${zoom})`,
       transition: '1s ease-in-out',
@@ -50,6 +50,13 @@ export default function ContentPresentational({
         boxShadow: '0px 1px 3px 0px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 2px 1px -1px rgba(0,0,0,0.12)'
       },
       [`& .canvas-${currentPage}`]: {
+        display: 'flex'
+      },
+      '& .fabric-canvas': {
+        display: 'none',
+        zIndex: 100
+      },
+      [`& .fabric-${currentPage}`]: {
         display: 'flex'
       },
       maxHeight: 'calc(100vh - 128px)'

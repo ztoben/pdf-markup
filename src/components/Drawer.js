@@ -95,6 +95,7 @@ export default function Drawer({
       <List disablePadding>
         {drawerTools.map(tool => (
           <ListItem
+            key={tool.action}
             button
             onClick={() => selectedTool !== tool.action && setSelectedTool(tool.action)}
             className={clsx(classes.listItem, {
