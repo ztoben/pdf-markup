@@ -6,6 +6,9 @@ _An app for basic pdf markups._
 
 View the live site [here](https://pdf-markup.netlify.com).
 
+Todo:
+- [ ] Implement fabric history for redo/undo (https://github.com/lyzerk/fabric-history)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 Icons made by <a href="https://www.flaticon.com/authors/prettycons" title="prettycons">prettycons</a>
