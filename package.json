@@ -9,7 +9,7 @@
     "@material-ui/styles": "4.2.1",
     "clsx": "1.0.4",
     "fabric": "3.3.2",
-    "jspdf": "1.5.3",
+    "jspdf": "2.3.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-dropzone": "10.1.5",
